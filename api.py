@@ -11,6 +11,7 @@ After `npm run build` in frontend/, the same process also serves the built site.
 import os
 import threading
 import time
+import json
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
@@ -303,6 +304,9 @@ def team_stats(abbr):
 @app.get("/api/team/<abbr>/roster")
 def team_roster(abbr):
     team = team_or_404(abbr)
+    snapshot = ROOT / "roster_snapshots" / f"{team}.json"
+    if snapshot.is_file():
+        return jsonify(json.loads(snapshot.read_text(encoding="utf-8")))
     roster, roster_down = roster_for(team)
     averages, averages_down = averages_for(team)
     players = []
