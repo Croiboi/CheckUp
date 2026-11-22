@@ -65,6 +65,13 @@ def report():
 
 
 def schedule():
+    if os.getenv("VERCEL"):
+        try:
+            games, fetched_at = data_service._read_cache(data_service.CACHE_FILE)
+            return data_service.Schedule(games, fetched_at)
+        except (OSError, ValueError, KeyError, TypeError):
+            pass
+
     return cached("schedule", 1800, data_service.load_schedule)
 
 
