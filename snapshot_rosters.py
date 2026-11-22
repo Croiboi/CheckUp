@@ -1,6 +1,9 @@
 import json
 import sys
 from pathlib import Path
+import os
+
+os.environ["CHECKUP_REFRESH_ROSTERS"] = "1"
 
 from api import TEAMS, app
 
