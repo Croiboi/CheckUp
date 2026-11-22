@@ -145,19 +145,29 @@ def leader_json(leader):
 # ----------------------------------------------------------------------- meta
 @app.get("/api/meta")
 def meta():
-    sched, model = schedule(), report()
-    if sched.fetched_at:
-        label = f"Schedule · {data_service.format_updated(sched.fetched_at)}"
-        state = "stale" if sched.stale else "ok"
-    else:
-        label, state = "Schedule unavailable", "none"
+    games = elo.load_history(CSV_PATH)
+    latest = max((game["date"] for game in games), default=None)
+    results_through = (
+        datetime.strptime(latest, "%Y-%m-%d").strftime("%b %d, %Y")
+        if latest else "No results yet"
+    )
+
+    schedule_status = {"label": "Schedule unavailable", "state": "none"}
+    try:
+        _, fetched_at = data_service._read_cache(data_service.CACHE_FILE)
+        schedule_status = {
+            "label": f"Saved schedule · {data_service.format_updated(fetched_at)}",
+            "state": "stale",
+        }
+    except (OSError, ValueError, KeyError, TypeError):
+        pass
+
     return jsonify({
         "teams": [team_json(a) for a in sorted(TEAMS, key=lambda a: TEAMS[a][0])],
-        "resultsThrough": through_label(),
-        "schedule": {"label": label, "state": state},
+        "resultsThrough": results_through,
+        "schedule": schedule_status,
         "season": data_service.SEASON,
         "windowDays": data_service.SCHEDULE_WINDOW_DAYS,
-        "formWeight": model["selected"]["form_weight"],
     })
 
 
