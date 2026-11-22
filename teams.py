@@ -1,0 +1,36 @@
+"""Full team names and accent colors, keyed by NBA tricode."""
+
+TEAMS = {
+    "ATL": ("Atlanta Hawks", "#E03A3E"),
+    "BKN": ("Brooklyn Nets", "#B0B7BC"),
+    "BOS": ("Boston Celtics", "#11A851"),
+    "CHA": ("Charlotte Hornets", "#00A3B4"),
+    "CHI": ("Chicago Bulls", "#CE1141"),
+    "CLE": ("Cleveland Cavaliers", "#FDBB30"),
+    "DAL": ("Dallas Mavericks", "#4A90E2"),
+    "DEN": ("Denver Nuggets", "#FEC524"),
+    "DET": ("Detroit Pistons", "#E0293F"),
+    "GSW": ("Golden State Warriors", "#FFC72C"),
+    "HOU": ("Houston Rockets", "#CE1141"),
+    "IND": ("Indiana Pacers", "#FDBB30"),
+    "LAC": ("LA Clippers", "#3D8BFD"),
+    "LAL": ("Los Angeles Lakers", "#FDB927"),
+    "MEM": ("Memphis Grizzlies", "#5D76A9"),
+    "MIA": ("Miami Heat", "#E03A5C"),
+    "MIL": ("Milwaukee Bucks", "#00A651"),
+    "MIN": ("Minnesota Timberwolves", "#78BE20"),
+    "NOP": ("New Orleans Pelicans", "#C8A86A"),
+    "NYK": ("New York Knicks", "#F58426"),
+    "OKC": ("Oklahoma City Thunder", "#2E9BE8"),
+    "ORL": ("Orlando Magic", "#3B9BE0"),
+    "PHI": ("Philadelphia 76ers", "#3B8FE0"),
+    "PHX": ("Phoenix Suns", "#E56020"),
+    "POR": ("Portland Trail Blazers", "#E03A3E"),
+    "SAC": ("Sacramento Kings", "#8B6FD6"),
+    "SAS": ("San Antonio Spurs", "#C4CED4"),
+    "TOR": ("Toronto Raptors", "#CE1141"),
+    "UTA": ("Utah Jazz", "#8A6BFF"),
+    "WAS": ("Washington Wizards", "#5B7FD6"),
+}
+
+NAME_TO_ABBR = {name: abbr for abbr, (name, _) in TEAMS.items()}

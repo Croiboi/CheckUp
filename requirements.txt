@@ -1,0 +1,6 @@
+flask>=3.0
+pandas
+requests
+nba_api
+# Only needed if you still want the original Streamlit app:
+streamlit
